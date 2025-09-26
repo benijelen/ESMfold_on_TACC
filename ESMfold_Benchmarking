@@ -1,0 +1,10 @@
+#randomly sample from GB4_50_500_90%_reps.faa (4.7M seq)
+seqkit sample -n 2000 -s 42 GB4_50_500_90%_reps.faa > gb4_2k.faa
+
+
+
+#from laptop terminal:
+scp /Users/benjaminjelen/gb4_2k.faa bjelen@vista.tacc.utexas.edu:~
+
+#back on Vista
+mkdir -p esmfold_2k

@@ -8,3 +8,13 @@ scp /Users/benjaminjelen/gb4_2k.faa bjelen@vista.tacc.utexas.edu:~
 
 #back on Vista
 mkdir -p esmfold_2k
+
+#load python
+module load python3/3.11.8
+
+#create virtual environment
+python -m venv ~/esmfold_venv
+source ~/esmfold_venv/bin/activate
+
+#install pytorch
+pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu121

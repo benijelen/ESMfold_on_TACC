@@ -1,6 +1,8 @@
 #Log into Vista and then request a single compute node in Vista’s `gh-dev` queue using `idev`:
 login1.vista(76)$ idev -p gh-dev -N 1 -n 1 -t 1:00:00
 
+
+
 #Load required modules
 c123-456$ module load gcc cuda
 c123-456$ module load python3

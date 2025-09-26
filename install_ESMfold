@@ -1,0 +1,18 @@
+#Log into Vista and then request a single compute node in Vista’s `gh-dev` queue using `idev`:
+login1.vista(76)$ idev -p gh-dev -N 1 -n 1 -t 1:00:00
+
+#Load required modules
+c123-456$ module load gcc cuda
+c123-456$ module load python3
+
+#Launch Python and check to see that you can import PyTorch and that it can utilize the GPU nodes:
+c123-456$ python3
+>>> import torch
+>>> torch.cuda.is_available()
+
+#If the previous command returns TRUE, install ESMFold by exiting out of the Python session and running the following:
+>>> exit()
+c123-456$ pip install fair-esm[esmfold]
+
+
+

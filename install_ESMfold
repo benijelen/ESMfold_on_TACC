@@ -18,3 +18,17 @@ c123-456$ pip install fair-esm[esmfold]
 
 #By default, this will install the ESMFold package to your $HOME/.local/lib/python3.9/site-packages location
 
+#openfold
+pip install git+https://github.com/aqlaboratory/openfold.git
+
+
+PYTHONPATH=$PWD:$HOME/.local/lib/python3.11/site-packages \
+python3 runESM.py -i gb4_2k.faa -o esmfold_out
+
+
+PYTHONPATH=$HOME/.local/lib/python3.11/site-packages python3 runESM.py
+
+PYTHONPATH=$HOME/.local/lib/python3.11/site-packages python3 esm-fold -i gb4_2k.faa -o esmfold_out
+
+
+

@@ -26,6 +26,10 @@ PYTHONPATH=$PWD:$HOME/.local/lib/python3.11/site-packages \
 python3 runESM.py -i gb4_2k.faa -o esmfold_out
 
 
+PYTHONPATH=$PWD:$HOME/.local/lib/python3.11/site-packages \
+python3 runESM.py -i gb4_2k.faa -o esmfold_out
+
+
 PYTHONPATH=$HOME/.local/lib/python3.11/site-packages python3 runESM.py
 
 PYTHONPATH=$HOME/.local/lib/python3.11/site-packages python3 esm-fold -i gb4_2k.faa -o esmfold_out

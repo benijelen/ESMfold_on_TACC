@@ -1,0 +1,71 @@
+idev -p gh-dev -N 1 -t 1:00:00
+
+module load gcc/15.1.0 cuda/12.8 python3/3.11.8
+
+python3 -m venv $SCRATCH/envs/esmfold
+
+source $SCRATCH/envs/esmfold/bin/activate
+
+pip install torch --index-url https://download.pytorch.org/whl/cu128
+
+pip install numpy
+
+python -c "import torch; print(torch.__version__, torch.cuda.is_available())"
+
+python3 /home1/10930/bjelen/run_esmfold_benchmark_infer_pdb.py \
+  --fasta /home1/10930/bjelen/GB4-5258-C15-3_Bin578.1L_noIPR.faa \
+  --outdir /home1/10930/bjelen/esmfold_out
+
+
+
+
+
+6. Move model cache to SCRATCH
+
+This is very important. You'll need to make a directory in your SCRATCH where
+hugging face can store model cache. Otherwise, you will quickly run out of
+disk space in your HOME directory:
+
+mkdir -p $SCRATCH/hf_cache
+
+Then, at the bottom of your ~/.bashrc, add the following lines:
+
+export HF_HOME=$SCRATCH/hf_cache
+export TRANSFORMERS_CACHE=$SCRATCH/hf_cache
+
+Refresh your ~/.bashrc with:
+
+source ~/.bashrc
+
+Now you don't have to worry about running those export commands every time you
+log into Vista wanting to load very large hugging face models.
+
+7. Import ESMFold from Transformers library and test
+
+Initialize a python3 instance, and then run the following:
+
+import torch
+from transformers import AutoTokenizer, EsmForProteinFolding
+
+# Load model and tokenizer from Hugging Face
+model = EsmForProteinFolding.from_pretrained("facebook/esmfold_v1") 
+tokenizer = AutoTokenizer.from_pretrained("facebook/esmfold_v1")
+inputs = tokenizer(["MLKNVQVQLV"], return_tensors="pt", add_special_tokens=
+False) # Very small peptide
+outputs = model(**inputs)
+folded_positions = outputs.positions
+print(folded_positions)
+# This should print a long tensor with folding information
+
+
+scp -C bjelen@vista.tacc.utexas.edu:/home1/10930/bjelen/folded_ca.pdb $HOME/Downloads/
+
+
+
+
+
+
+
+
+
+

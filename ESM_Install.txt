@@ -10,7 +10,14 @@ pip install torch --index-url https://download.pytorch.org/whl/cu128
 
 pip install numpy
 
+pip install transformers
+
 python -c "import torch; print(torch.__version__, torch.cuda.is_available())"
+
+pip install fair-esm[esmfold]
+
+pip install git+https://github.com/aqlaboratory/openfold.git
+
 
 python3 /home1/10930/bjelen/run_esmfold_benchmark_infer_pdb.py \
   --fasta /home1/10930/bjelen/GB4-5258-C15-3_Bin578.1L_noIPR.faa \
